@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Document</title>
+    <style>
+        :root { --max-width: 1000px; --gap: 28px; }
+        html, body { margin: 0; background: #fafafa; color: #111; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+        main { margin: 0 auto; padding: 24px 16px 64px; max-width: var(--max-width); }
+        .page-wrap { margin: 0 auto var(--gap); position: relative; }
+        canvas.page { display: block; width: 100%; height: auto; box-shadow: 0 2px 22px rgba(0,0,0,.12); background: #fff; }
+        .loading { text-align:center; padding: 48px 0; opacity:.6; }
+        .error { color: #b00020; text-align:center; padding: 32px 0; }
+        /* Optional sticky site header area (empty but ready) */
+        header.site { position: sticky; top: 0; height: 0; z-index: 1; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76"></script>
+</head>
+<body>
+<header class="site"></header>
+<main>
+    <div id="status" class="loading">Loading…</div>
+    <div id="viewer"></div>
+</main>
+
+<script>
+    // Configure worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.7.76";
+
+    // ?file=custom.pdf (defaults to my.pdf)
+    // const params = new URLSearchParams(location.search);
+    const url = "docs/zadykian-cv.pdf";
+    const viewer = document.getElementById("viewer");
+    const status = document.getElementById("status");
+
+    // HiDPI scale factor for crisp text on retina
+    const deviceScale = Math.min(window.devicePixelRatio || 1, 2); // cap to keep memory sane
+
+    // Render a page to a canvas that auto-fits the container width
+    async function renderPageToCanvas(pdf, pageNumber, containerWidth) {
+        const page = await pdf.getPage(pageNumber);
+        const baseViewport = page.getViewport({ scale: 1 });
+
+        const cssScale = containerWidth / baseViewport.width;     // visual scale to fit width
+        const pixelScale = cssScale * deviceScale;                 // actual pixel density for crispness
+        const viewport = page.getViewport({ scale: pixelScale });
+
+        const wrap = document.createElement("div");
+        wrap.className = "page-wrap";
+        const canvas = document.createElement("canvas");
+        canvas.className = "page";
+        const ctx = canvas.getContext("2d", { alpha: false });
+
+        canvas.width  = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        // CSS size = container width; browser will downscale pixels → sharp on retina
+        canvas.style.width = Math.floor(baseViewport.width * cssScale) + "px";
+        canvas.style.height = Math.floor(baseViewport.height * cssScale) + "px";
+
+        wrap.appendChild(canvas);
+        viewer.appendChild(wrap);
+
+        await page.render({ canvasContext: ctx, viewport }).promise;
+    }
+
+    // Lazy load pages as they scroll into view
+    async function init() {
+        const pdf = await pdfjsLib.getDocument(url).promise;
+        status.remove();
+
+        const containerWidth = viewer.clientWidth || document.documentElement.clientWidth;
+
+        // Placeholders for each page so the page count feels immediate
+        const placeholders = Array.from({ length: pdf.numPages }, (_, i) => {
+            const ph = document.createElement("div");
+            ph.className = "page-wrap";
+            ph.style.minHeight = "200px";
+            ph.dataset.page = (i + 1).toString();
+            viewer.appendChild(ph);
+            return ph;
+        });
+
+        const inView = new Set();
+        const observer = new IntersectionObserver(async (entries) => {
+            for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                const el = entry.target;
+                const pageNum = Number(el.dataset.page);
+                if (inView.has(pageNum)) continue;
+                inView.add(pageNum);
+                // Replace placeholder with real canvas
+                el.replaceWith(); // remove placeholder
+                await renderPageToCanvas(pdf, pageNum, viewer.
+                    clientWidth || containerWidth);
+            }
+        }, { root: null, rootMargin: "600px 0px", threshold: 0.01 });
+
+        placeholders.forEach(ph => observer.observe(ph));
+
+        // Handle window resize by reloading (simplest and reliable)
+        let t;
+        addEventListener("resize", () => {
+            clearTimeout(t);
+            t = setTimeout(() => location.reload(), 200);
+        });
+    }
+
+    init().catch(err => {
+        status.className = "error";
+        status.textContent = "Error loading document.";
+        console.error(err);
+    });
+</script>
+</body>
+</html>

@@ -1,1 +1,0 @@
-# zadykian.github.io
