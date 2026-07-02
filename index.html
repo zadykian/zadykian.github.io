@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <!-- Resolve relative links (docs/*.pdf, downloads) against the live site, so
+         they stay valid when the page is rendered to PDF from a local file. -->
+    <base href="https://zadykian.dev/">
     <script>
         // Resolve the theme before first paint to avoid a flash of the wrong colors.
         (function () {
@@ -240,6 +243,13 @@
             color: var(--muted);
         }
 
+        .loc-icon {
+            width: 13px;
+            height: 13px;
+            vertical-align: -2px;
+            margin-right: 1px;
+        }
+
         /* ---- sections ---- */
         section {
             margin-top: 30px;
@@ -379,8 +389,8 @@
                 --ink: #000000;
                 --muted: #333333;
                 --rule: #cccccc;
-                --accent: #000000;
-                --accent-hi: #000000;
+                --accent: #2b5fd0;
+                --accent-hi: #1a44a6;
                 --chip-bg: #ffffff;
                 --chip-rule: #cccccc;
                 --btn-bg: #ffffff;
@@ -407,11 +417,9 @@
                 display: none;
             }
 
-            a {
-                color: #000;
-            }
-
-            .entry, section {
+            /* Keep individual entries intact, but let long sections flow across
+               pages so the document doesn't leave a page half-empty. */
+            .entry {
                 page-break-inside: avoid;
             }
         }
@@ -458,8 +466,23 @@
             <li><a href="https://t.me/zadykian" rel="me">Telegram</a></li>
             <li><a href="https://www.linkedin.com/in/zadykian" rel="me">LinkedIn</a></li>
             <li><a href="https://github.com/zadykian" rel="me">GitHub</a></li>
-            <li class="loc">📍 Tbilisi, Georgia</li>
-            <li class="loc">🌐 UTC+4</li>
+            <li class="loc">
+                <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Tbilisi, Georgia
+            </li>
+            <li class="loc">
+                <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                UTC+4
+            </li>
         </ul>
     </header>
 
