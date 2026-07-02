@@ -119,7 +119,7 @@
         .tagline {
             margin: 0 0 16px;
             color: var(--muted);
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
         }
 
@@ -130,7 +130,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px 18px;
-            font-size: 13.5px;
+            font-size: 14px;
         }
 
         .contacts .loc {
@@ -143,7 +143,7 @@
         }
 
         h2 {
-            font-size: 13px;
+            font-size: 16px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -198,12 +198,12 @@
 
         .role {
             font-weight: 700;
-            font-size: 15.5px;
+            font-size: 18px;
         }
 
         .dates {
             color: var(--muted);
-            font-size: 13px;
+            font-size: 14px;
             white-space: nowrap;
         }
 
@@ -213,7 +213,7 @@
         }
 
         .links-line {
-            font-size: 13.5px;
+            font-size: 14px;
         }
 
         .lead-in {
@@ -221,11 +221,17 @@
         }
 
         ul.bullets {
+            list-style: none;
             margin: 0 0 12px;
-            padding-left: 20px;
+            padding-left: 12px;
         }
 
         ul.bullets li {
+            margin-bottom: 4px;
+        }
+
+        ul.bullets li:before {
+            content: "-> ";
             margin-bottom: 4px;
         }
 
@@ -312,15 +318,15 @@
             <li><a href="https://t.me/zadykian" rel="me">Telegram</a></li>
             <li><a href="https://www.linkedin.com/in/zadykian" rel="me">LinkedIn</a></li>
             <li><a href="https://github.com/zadykian" rel="me">GitHub</a></li>
-            <li class="loc">Tbilisi, Georgia</li>
-            <li class="loc">UTC+4</li>
+            <li class="loc">📍 Tbilisi, Georgia</li>
+            <li class="loc">🌐 UTC+4</li>
         </ul>
     </header>
 
     <section id="summary">
         <h2>Summary</h2>
         <p>Software Engineer specializing in developer tooling, platform engineering and distributed systems across .NET
-            and Go. Accelerated development velocity by building internal SDKs and automation tools. Architected and
+            and Go. Speeded up team development by building internal SDKs and automation tools. Architected and
             delivered critical infrastructure for both a high-scale e-commerce platform (Ozon) and a Layer&nbsp;2
             blockchain network (=nil; Foundation).</p>
     </section>
@@ -344,10 +350,10 @@
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Lead SDK Developer</span>
-                <span class="dates">Jul 2025 &rarr; Present</span>
+                <span class="dates">Jul 2025 -> Present</span>
             </div>
-            <div class="entry-org"><a href="https://mobilepark.ru/en/">Mobile Park</a></div>
-            <p>After finishing my work on L2 blockchain infrastructure at =nil;, I transitioned back to platform
+            <div class="entry-org"><a href="https://mobilepark.ru/">Mobile Park</a></div>
+            <p>After finishing my work on L2 blockchain infrastructure at nil, I transitioned back to platform
                 engineering at Mobile Park.</p>
             <p>I lead the technical direction of an internal .NET SDK ecosystem used by 15&ndash;20 engineers across the
                 company.</p>
@@ -362,13 +368,13 @@
                 </li>
             </ul>
             <p>The platform itself is a modular monorepo containing several dozen runtime libraries, build tools, and
-                multiple .NET CLI tools, delivered as NuGet packages (NUKE build + Azure).</p>
+                multiple .NET CLI tools, delivered as NuGet packages (NUKE build and Azure).</p>
         </article>
 
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Senior Developer</span>
-                <span class="dates">Aug 2024 &rarr; Jul 2025</span>
+                <span class="dates">Aug 2024 -> Jul 2025</span>
             </div>
             <div class="entry-org"><a href="https://nil.foundation">=nil; Foundation</a></div>
             <p>As part of the zkEVM Engineering team, I designed and built a system for a distributed Zero-Knowledge
@@ -386,26 +392,26 @@
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Senior Developer</span>
-                <span class="dates">Aug 2023 &rarr; Aug 2024</span>
+                <span class="dates">Aug 2023 -> Aug 2024</span>
             </div>
-            <div class="entry-org"><a href="https://mobilepark.ru/en/">Mobile Park</a></div>
-            <p>Initially I joined the company to automate the migration of a large legacy codebase to modern .NET. The
+            <div class="entry-org"><a href="https://mobilepark.ru/">Mobile Park</a></div>
+            <p>Initially, I joined the company to automate the migration of a large legacy codebase to modern .NET. The
                 main goal was to speed up refactoring of a system built on deprecated technologies such as .NET
                 Framework 3.x and iBatis.</p>
             <p>To achieve this, we developed a large set of source code analyzers/rewriters, built on Roslyn for syntax
                 and semantic analysis and complemented with NuGet packages designed to replace outdated or unwanted
                 dependencies.</p>
-            <p>After that, I transitioned to internal platform development. My main objective was to provide a unified
-                set of tools for a team of ~20 engineers.</p>
+            <p>After that, I transitioned to internal platform development. My main goal was to provide a unified
+                set of tools for multiple engineering teams.</p>
         </article>
 
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Lead Developer</span>
-                <span class="dates">Sep 2022 &rarr; Aug 2023</span>
+                <span class="dates">Sep 2022 -> Aug 2023</span>
             </div>
             <div class="entry-org"><a href="https://corp.ozon.com">Ozon Tech</a></div>
-            <p>Ozon is one of the largest e-commerce platforms in Russia, operating at massive scale with a
+            <p>Ozon is one of the largest e-commerce platforms in Russia, operating at a massive scale with a
                 microservices-based architecture.</p>
             <p>Here I designed and led the development of a complex financial system, implemented in C# and Go, handling
                 seller tariffication and charging processes.</p>
@@ -416,9 +422,9 @@
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Senior Developer</span>
-                <span class="dates">Mar 2021 &rarr; Sep 2022</span>
+                <span class="dates">Mar 2021 -> Sep 2022</span>
             </div>
-            <div class="entry-org"><a href="https://bars.group/en/main">BARS Group</a></div>
+            <div class="entry-org"><a href="https://bars.group/">BARS Group</a></div>
             <p>Created and taught a company-based backend development course for junior engineers, mentoring around 10
                 students who later secured internships and full-time roles.</p>
             <p>Developed reusable internal .NET libraries and tools, including RPC and caching frameworks used by
@@ -429,9 +435,9 @@
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Middle Developer</span>
-                <span class="dates">Aug 2019 &rarr; Mar 2021</span>
+                <span class="dates">Aug 2019 -> Mar 2021</span>
             </div>
-            <div class="entry-org"><a href="https://bars.group/en/main">BARS Group</a></div>
+            <div class="entry-org"><a href="https://bars.group/">BARS Group</a></div>
             <p>Contributed to the development and maintenance of a regional billing system.</p>
             <p>Implemented new .NET Core services, investigated performance and stability issues, and migrated legacy
                 codebase components to newer frameworks and libraries.</p>
@@ -440,9 +446,9 @@
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Junior Developer</span>
-                <span class="dates">Feb 2019 &rarr; Aug 2019</span>
+                <span class="dates">Feb 2019 -> Aug 2019</span>
             </div>
-            <div class="entry-org"><a href="https://bars.group/en/main">BARS Group</a></div>
+            <div class="entry-org"><a href="https://bars.group/">BARS Group</a></div>
             <p>Joined the department as an intern in my first corporate software engineering role and received a
                 full-time offer after two weeks.</p>
             <p>Developed and maintained SOAP and REST integration services. Built a Windows desktop application that
@@ -455,7 +461,7 @@
         <article class="entry">
             <div class="entry-head">
                 <span class="role">Bachelor&rsquo;s Degree, Software Engineering</span>
-                <span class="dates">2017 &rarr; 2021</span>
+                <span class="dates">Sep 2017 -> Jun 2021</span>
             </div>
             <div class="entry-org"><a href="https://kpfu.ru/eng/itis">Kazan State University</a></div>
             <p>
