@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <script>
-        // Resolve the theme before first paint to avoid a flash of the wrong colours.
+        // Resolve the theme before first paint to avoid a flash of the wrong colors.
         (function () {
             try {
-                var stored = localStorage.getItem("theme");
-                var theme = (stored === "light" || stored === "dark")
+                const stored = localStorage.getItem("theme");
+                const theme = (stored === "light" || stored === "dark")
                     ? stored
                     : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
                 document.documentElement.setAttribute("data-theme", theme);
@@ -618,13 +618,13 @@
 </footer>
 <script>
     (function () {
-        var toggle = document.getElementById("theme-toggle");
+        const toggle = document.getElementById("theme-toggle");
         if (!toggle) return;
-        var root = document.documentElement;
-        var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const root = document.documentElement;
+        const media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
 
         toggle.addEventListener("click", function () {
-            var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
             root.setAttribute("data-theme", next);
             try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
         });
@@ -632,7 +632,7 @@
         // Keep following the OS while the visitor has not made an explicit choice.
         if (media) {
             media.addEventListener("change", function (e) {
-                var stored;
+                let stored;
                 try { stored = localStorage.getItem("theme"); } catch (e2) { stored = null; }
                 if (stored !== "light" && stored !== "dark") {
                     root.setAttribute("data-theme", e.matches ? "dark" : "light");
