@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Build the CV PDF in a container and write it to ./docs/zadykian-cv.pdf on the host.
+#
+# Usage: ./build-pdf
+set -euo pipefail
+
+cd "$(dirname "$0")"
+
+docker build -t zadykian-cv-pdf .
+docker run --rm -v "$PWD/docs:/app/docs" zadykian-cv-pdf
